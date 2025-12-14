@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Sets & Notes",
+  "version": "0.1.0",
+  "description": "Manage tab sets, sessions, and notes in a side panel.",
+  "permissions": [
+    "tabs",
+    "sessions",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  }
+}

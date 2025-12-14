@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Side Tab Organizer</title>
+  <link rel="stylesheet" href="sidebar.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <input
+      id="search-input"
+      type="text"
+      placeholder="Search tabs by title or URL..."
+      autocomplete="off"
+    />
+  </header>
+
+  <section class="summary-row">
+    <span id="tab-count">Tabs open: 0</span>
+    <button id="create-group-btn">+ Create group</button>
+  </section>
+
+  <main id="accordion-container">
+    <!-- Ungrouped tabs section -->
+    <section class="accordion-section" data-group-id="__ungrouped__">
+      <button class="accordion-header">
+        <span class="accordion-title">Ungrouped</span>
+        <span class="accordion-count" id="ungrouped-count">0</span>
+        <span class="accordion-chevron">▾</span>
+      </button>
+      <div class="accordion-body">
+        <ul class="tab-list" id="ungrouped-tabs"></ul>
+      </div>
+    </section>
+
+    <!-- Group sections will be injected here -->
+    <div id="groups-root"></div>
+  </main>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>

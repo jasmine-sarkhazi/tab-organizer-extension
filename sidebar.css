@@ -1,0 +1,292 @@
+:root {
+    --bg-main: #020617;
+    --bg-secondary: #0b1120;
+    --bg-accent: #111827;
+    --border-subtle: #1f2937;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --accent: #38bdf8;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    background: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-bar {
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg-secondary);
+  }
+  
+  #search-input {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-main);
+    color: var(--text-main);
+    outline: none;
+    font-size: 13px;
+  }
+  
+  #search-input::placeholder {
+    color: var(--text-muted);
+  }
+  
+  .summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 8px;
+    background: var(--bg-main);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  
+  #tab-count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  
+  #create-group-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background: var(--accent);
+    color: #020617;
+  }
+  
+  #create-group-btn:hover {
+    filter: brightness(1.1);
+  }
+  
+  #accordion-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 0 6px 0;
+  }
+  
+  /* Accordions */
+  
+  .accordion-section {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  
+  .accordion-header {
+    width: 100%;
+    border: 1px solid #e5e7eb;      /* distinct light border */
+    padding: 5px;                      /* we'll control padding in inner elements */
+           /* light background */
+    color: #111827;
+    display: flex;
+    align-items: stretch;
+    cursor: pointer;
+  }
+  
+  /* No hover darkening anymore, it's light now */
+  .accordion-header:hover {
+    background: #f3f4f6;
+  }
+  
+
+  
+  .accordion-title {
+    font-weight: 500;
+  }
+  
+  .accordion-count {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-left: 8px;
+    flex: 0 0 auto;
+  }
+  
+  .accordion-chevron {
+    font-size: 25px;
+    margin-left: 8px;
+    margin-top: -6px;
+  }
+  
+  .accordion-body {
+    max-height: 500px;
+    overflow-y: auto;
+    transition: max-height 0.15s ease-out;
+  }
+  
+  .accordion-section.collapsed .accordion-body {
+    max-height: 0;
+  }
+  
+  .accordion-section.collapsed .accordion-chevron {
+    transform: rotate(-90deg);
+  }
+  
+  /* Tab rows */
+  
+  .tab-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .tab-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border: 2px solid var(--border-subtle);
+    border-left: 4px solid var(--border-subtle);
+    border-radius: 4px;
+    margin: 4px 8px;
+    cursor: pointer;
+    background: var(--bg-secondary);
+    transition: all 0.2s ease;
+  }
+  
+  .tab-row:hover {
+    background: var(--bg-accent);
+    transform: translateX(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tab-row.active {
+    background: #1f2937;
+    border-left-width: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .tab-favicon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  
+  .tab-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .tab-title {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .tab-domain {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .tab-controls {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  
+  .group-select {
+    max-width: 120px;
+    font-size: 11px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-main);
+    color: var(--text-main);
+  }
+  
+  .group-color-block {
+    flex: 0 0 50%;          /* take half of the header width */
+    height: 100%;
+    border-right: 1px solid #e5e7eb;
+  }
+  
+  /* Group header */
+  
+  .group-header-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .group-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  
+  .group-name {
+    font-weight: 500;
+  }
+  
+  .delete-group-btn {
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+  
+  .delete-group-btn:hover {
+    color: #f97373;
+  }
+  .group-header-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  
+  .group-header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .group-header-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .group-name {
+    font-weight: 600;
+    font-size: 13px;
+  }
+  
+  .delete-group-btn {
+    border: none;
+    background: none;
+    color: #9ca3af;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 2px;
+  }
+  
+  .delete-group-btn:hover {
+    color: #f87171;
+  }
+    
