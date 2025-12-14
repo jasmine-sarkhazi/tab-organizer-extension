@@ -156,15 +156,22 @@
     transition: all 0.2s ease;
   }
   
+  /* Group color will be applied via inline styles, but provide fallback */
+  .tab-row[data-group-color] {
+    border-left-color: var(--group-color, var(--border-subtle));
+    border-color: var(--group-color, var(--border-subtle));
+  }
+  
   .tab-row:hover {
     background: var(--bg-accent);
     transform: translateX(2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    /* Preserve border color on hover - inline styles will handle it */
   }
   
   .tab-row.active {
     background: #1f2937;
-    border-left-width: 6px;
+    /* border-left-width is set via inline style, don't override color here */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
   

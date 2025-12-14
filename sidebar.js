@@ -126,18 +126,25 @@ function buildTabRow(tab, groupOptions) {
 
   // Apply group color to tab border
   const currentGroup = getGroupForTab(tab.id);
+  const borderColor = currentGroup && currentGroup.color ? currentGroup.color : "#6b7280";
+  const borderWidth = tab.active ? "6px" : "4px";
+  
+  // Set data attribute for CSS fallback
   if (currentGroup && currentGroup.color) {
-    li.style.borderLeftColor = currentGroup.color;
-    li.style.borderColor = currentGroup.color;
-    // Add a subtle background tint based on group color
+    li.setAttribute("data-group-color", currentGroup.color);
+    li.style.setProperty("--group-color", currentGroup.color);
+  }
+  
+  // Set the full border-left property to override CSS shorthand
+  li.style.borderLeft = `${borderWidth} solid ${borderColor}`;
+  li.style.borderColor = borderColor;
+  
+  // Add a subtle background tint based on group color
+  if (currentGroup && currentGroup.color) {
     const rgb = hexToRgb(currentGroup.color);
     if (rgb) {
       li.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.1)`;
     }
-  } else {
-    // Ungrouped tabs get a neutral gray border
-    li.style.borderLeftColor = "#6b7280";
-    li.style.borderColor = "#6b7280";
   }
 
   // favicon – avoid chrome://favicon to fix your error
@@ -218,13 +225,19 @@ function buildGroupSection(group, groupTabs, groupOptions) {
     section.className = "accordion-section";
     section.dataset.groupId = group.id;
   
+    // Ensure group has a color
+    if (!group.color) {
+      group.color = getRandomGroupColor();
+      saveGroups(); // Save the updated color
+    }
+  
     const header = document.createElement("button");
     header.className = "accordion-header";
   
     // LEFT: color block (half header width)
     const colorBlock = document.createElement("div");
     colorBlock.className = "group-color-block";
-    colorBlock.style.backgroundColor = group.color || getRandomGroupColor();
+    colorBlock.style.backgroundColor = group.color;
   
     // RIGHT: header content
     const headerMain = document.createElement("div");
