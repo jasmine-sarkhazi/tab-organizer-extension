@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Tab Sets & Notes",
+  "name": "Tab organizer",
   "version": "0.1.0",
-  "description": "Manage tab sets, sessions, and notes in a side panel.",
+  "description": "Manage your browsing sessions in a side panel.",
   "permissions": [
     "tabs",
     "sessions",
@@ -13,7 +13,7 @@
     "type": "module"
   },
   "side_panel": {
-    "default_path": "sidepanel.html"
+    "default_path": "sidebar.html"
   },
   "icons": {
     "16": "assets/icons/icon16.png",
