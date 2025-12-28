@@ -89,7 +89,7 @@
     width: 100%;
     border: 1px solid #e5e7eb;      /* distinct light border */
     padding: 5px;                      /* we'll control padding in inner elements */
-           /* light background */
+    background: #f9fafb;               /* light background */
     color: #111827;
     display: flex;
     align-items: stretch;
