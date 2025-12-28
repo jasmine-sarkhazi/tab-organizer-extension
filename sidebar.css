@@ -89,7 +89,7 @@
     width: 100%;
     border: 1px solid #e5e7eb;      /* distinct light border */
     padding: 5px;                      /* we'll control padding in inner elements */
-    background: #f9fafb;               /* light background */
+    background: #ffffff;               /* lighter white background */
     color: #111827;
     display: flex;
     align-items: stretch;
@@ -98,13 +98,14 @@
   
   /* No hover darkening anymore, it's light now */
   .accordion-header:hover {
-    background: #f3f4f6;
+    filter: brightness(0.95);
   }
   
 
   
   .accordion-title {
     font-weight: 500;
+    font-size: 13px;
   }
   
   .accordion-count {
