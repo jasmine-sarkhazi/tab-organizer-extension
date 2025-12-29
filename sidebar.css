@@ -1,5 +1,5 @@
 :root {
-    --bg-main: #020617;
+    --bg-main: #f5f5f5;
     --bg-secondary: #0b1120;
     --bg-accent: #111827;
     --border-subtle: #1f2937;
@@ -88,10 +88,10 @@
   .accordion-header {
     width: 100%;
     border: 1px solid #e5e7eb;
-    border-left: 4px solid #e5e7eb;  /* thicker left border for color accent */
+    border-left: 4px solid #e5e7eb;
     padding: 8px 12px;
-    background: #ffffff !important;   /* force white background */
-    color: #111827 !important;        /* force dark text */
+    background: #ffffff;   /* default white, will be overridden by inline styles */
+    color: #111827 !important;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -107,6 +107,7 @@
   .accordion-title {
     font-weight: 500;
     font-size: 13px;
+    font-family: Calibri, sans-serif;
   }
   
   .accordion-count {
