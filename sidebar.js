@@ -234,16 +234,14 @@ function buildGroupSection(group, groupTabs, groupOptions) {
     const header = document.createElement("button");
     header.className = "accordion-header";
 
-    // Apply unique pastel background color based on group color
-    const rgb = hexToRgb(group.color);
-    if (rgb) {
-      header.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.15)`;
+    // Apply unique colored left border for distinction
+    if (group.color) {
+      header.style.borderLeftColor = group.color;
     }
 
-    // LEFT: color block (half header width)
+    // LEFT: color block (hidden by CSS now)
     const colorBlock = document.createElement("div");
     colorBlock.className = "group-color-block";
-    colorBlock.style.backgroundColor = group.color;
   
     // RIGHT: header content
     const headerMain = document.createElement("div");
@@ -405,7 +403,7 @@ async function init() {
 
   // Set unique color for ungrouped accordion header
   if (ungroupedHeader) {
-    ungroupedHeader.style.backgroundColor = 'rgba(156, 163, 175, 0.15)'; // Light gray tint
+    ungroupedHeader.style.borderLeftColor = '#9ca3af'; // Gray border
   }
 
   await fetchTabs();
