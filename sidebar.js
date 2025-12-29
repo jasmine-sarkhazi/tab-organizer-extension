@@ -234,8 +234,12 @@ function buildGroupSection(group, groupTabs, groupOptions) {
     const header = document.createElement("button");
     header.className = "accordion-header";
 
-    // Apply unique colored left border for distinction
+    // Apply unique background color to accordion header
     if (group.color) {
+      const rgb = hexToRgb(group.color);
+      if (rgb) {
+        header.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`;
+      }
       header.style.borderLeftColor = group.color;
     }
 
@@ -403,6 +407,7 @@ async function init() {
 
   // Set unique color for ungrouped accordion header
   if (ungroupedHeader) {
+    ungroupedHeader.style.backgroundColor = 'rgba(156, 163, 175, 0.2)'; // Light gray background
     ungroupedHeader.style.borderLeftColor = '#9ca3af'; // Gray border
   }
 
