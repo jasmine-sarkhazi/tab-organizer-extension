@@ -90,7 +90,7 @@
     border: 1px solid #e5e7eb;
     border-left: 4px solid #e5e7eb;
     padding: 8px 12px;
-    background: #ffffff;   /* default white, will be overridden by inline styles */
+    background: var(--bg-main);   /* dynamic background, will be overridden by inline styles */
     color: #111827 !important;
     display: flex;
     align-items: center;

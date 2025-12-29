@@ -405,10 +405,14 @@ async function init() {
   loadGroups();
   ensureGroupColors();
 
-  // Set unique color for ungrouped accordion header
+  // Set dynamic color for ungrouped accordion header
   if (ungroupedHeader) {
-    ungroupedHeader.style.backgroundColor = 'rgba(156, 163, 175, 0.2)'; // Light gray background
-    ungroupedHeader.style.borderLeftColor = '#9ca3af'; // Gray border
+    const ungroupedColor = '#94A3B8'; // Slate blue-gray for ungrouped
+    const rgb = hexToRgb(ungroupedColor);
+    if (rgb) {
+      ungroupedHeader.style.backgroundColor = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)`;
+    }
+    ungroupedHeader.style.borderLeftColor = ungroupedColor;
   }
 
   await fetchTabs();
