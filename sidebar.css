@@ -87,12 +87,13 @@
   
   .accordion-header {
     width: 100%;
-    border: 1px solid #e5e7eb;      /* distinct light border */
-    padding: 5px;                      /* we'll control padding in inner elements */
-    background: #ffffff;               /* lighter white background */
-    color: #111827;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #e5e7eb;  /* thicker left border for color accent */
+    padding: 8px 12px;
+    background: #ffffff !important;   /* force white background */
+    color: #111827 !important;        /* force dark text */
     display: flex;
-    align-items: stretch;
+    align-items: center;
     cursor: pointer;
   }
   
@@ -109,7 +110,7 @@
   }
   
   .accordion-count {
-    font-size: 15px;
+    font-size: 13px;
     color: var(--text-muted);
     margin-left: 8px;
     flex: 0 0 auto;
@@ -223,9 +224,7 @@
   }
   
   .group-color-block {
-    flex: 0 0 50%;          /* take half of the header width */
-    height: 100%;
-    border-right: 1px solid #e5e7eb;
+    display: none;  /* hide the dark color block */
   }
   
   /* Group header */
