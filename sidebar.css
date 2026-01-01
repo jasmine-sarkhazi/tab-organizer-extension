@@ -297,4 +297,112 @@
   .delete-group-btn:hover {
     color: #f87171;
   }
-    
+
+/* Note button */
+.note-btn {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.note-btn:hover {
+  background: rgba(107, 159, 138, 0.2);
+  color: var(--text-main);
+}
+
+.note-btn.has-note {
+  color: var(--bg-secondary);
+}
+
+.note-btn.has-note:hover {
+  color: var(--accent);
+}
+
+/* Note box */
+.note-box {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  background: var(--bg-accent);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  margin-top: 4px;
+  width: calc(100% - 16px);
+  margin-left: 8px;
+}
+
+.note-box.visible {
+  display: flex;
+}
+
+.note-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-size: 12px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.note-textarea:focus {
+  border-color: var(--bg-secondary);
+  box-shadow: 0 0 0 2px rgba(107, 159, 138, 0.2);
+}
+
+.note-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.note-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.note-save-btn,
+.note-cancel-btn {
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.note-save-btn {
+  background: var(--bg-secondary);
+  color: #ffffff;
+}
+
+.note-save-btn:hover {
+  filter: brightness(1.1);
+}
+
+.note-cancel-btn {
+  background: var(--bg-main);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.note-cancel-btn:hover {
+  background: var(--border-subtle);
+  color: var(--text-main);
+}
+
+/* Update tab-row to support note box */
+.tab-row {
+  flex-wrap: wrap;
+}

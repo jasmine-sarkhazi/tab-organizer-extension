@@ -25,8 +25,10 @@ const GROUP_COLORS = [
   
 let allTabs = [];
 let groups = []; // [{ id: string, name: string, tabIds: number[] }]
+let tabNotes = {}; // { tabId: noteText }
 
-const STORAGE_KEY = "tabOrganizerGroups";   
+const STORAGE_KEY = "tabOrganizerGroups";
+const NOTES_STORAGE_KEY = "tabOrganizerNotes";   
 function getRandomGroupColor() {
     const idx = Math.floor(Math.random() * GROUP_COLORS.length);
     return GROUP_COLORS[idx];
@@ -49,6 +51,37 @@ function loadGroups() {
 
 function saveGroups() {
    localStorage.setItem(STORAGE_KEY, JSON.stringify(groups));
+}
+
+function loadNotes() {
+  const stored = localStorage.getItem(NOTES_STORAGE_KEY);
+  if (stored) {
+    try {
+      tabNotes = JSON.parse(stored);
+    } catch (e) {
+      console.error("Failed to parse stored notes:", e);
+      tabNotes = {};
+    }
+  } else {
+    tabNotes = {};
+  }
+}
+
+function saveNotes() {
+  localStorage.setItem(NOTES_STORAGE_KEY, JSON.stringify(tabNotes));
+}
+
+function getNoteForTab(tabId) {
+  return tabNotes[tabId] || "";
+}
+
+function setNoteForTab(tabId, note) {
+  if (note && note.trim()) {
+    tabNotes[tabId] = note.trim();
+  } else {
+    delete tabNotes[tabId];
+  }
+  saveNotes();
 }
 
 function ensureGroupColors() {
@@ -208,9 +241,82 @@ function buildTabRow(tab, groupOptions) {
 
   controls.appendChild(select);
 
+  // Note icon button
+  const noteBtn = document.createElement("button");
+  noteBtn.className = "note-btn";
+  noteBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 3.5C3 2.67157 3.67157 2 4.5 2H9.5L13 5.5V12.5C13 13.3284 12.3284 14 11.5 14H4.5C3.67157 14 3 13.3284 3 12.5V3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M5.5 7H10.5M5.5 9.5H10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>`;
+  noteBtn.title = "Add/edit note";
+  noteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const noteBox = li.querySelector(".note-box");
+    if (noteBox) {
+      noteBox.classList.toggle("visible");
+      if (noteBox.classList.contains("visible")) {
+        const textarea = noteBox.querySelector("textarea");
+        textarea.focus();
+      }
+    }
+  });
+
+  // Check if tab has a note and add indicator
+  const existingNote = getNoteForTab(tab.id);
+  if (existingNote) {
+    noteBtn.classList.add("has-note");
+  }
+
+  controls.appendChild(noteBtn);
+
   li.appendChild(favicon);
   li.appendChild(main);
   li.appendChild(controls);
+
+  // Note box (hidden by default)
+  const noteBox = document.createElement("div");
+  noteBox.className = "note-box";
+
+  const noteTextarea = document.createElement("textarea");
+  noteTextarea.className = "note-textarea";
+  noteTextarea.placeholder = "Add a note for this tab...";
+  noteTextarea.value = existingNote;
+  noteTextarea.addEventListener("click", (e) => e.stopPropagation());
+
+  const noteActions = document.createElement("div");
+  noteActions.className = "note-actions";
+
+  const saveNoteBtn = document.createElement("button");
+  saveNoteBtn.className = "note-save-btn";
+  saveNoteBtn.textContent = "Save";
+  saveNoteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setNoteForTab(tab.id, noteTextarea.value);
+    noteBox.classList.remove("visible");
+    // Update the note button indicator
+    if (noteTextarea.value.trim()) {
+      noteBtn.classList.add("has-note");
+    } else {
+      noteBtn.classList.remove("has-note");
+    }
+  });
+
+  const cancelNoteBtn = document.createElement("button");
+  cancelNoteBtn.className = "note-cancel-btn";
+  cancelNoteBtn.textContent = "Cancel";
+  cancelNoteBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    noteTextarea.value = getNoteForTab(tab.id);
+    noteBox.classList.remove("visible");
+  });
+
+  noteActions.appendChild(saveNoteBtn);
+  noteActions.appendChild(cancelNoteBtn);
+
+  noteBox.appendChild(noteTextarea);
+  noteBox.appendChild(noteActions);
+
+  li.appendChild(noteBox);
 
   // Activate tab on row click
   li.addEventListener("click", async () => {
@@ -403,6 +509,7 @@ createGroupBtn.addEventListener("click", async () => {
 /* ---------- init + polling ---------- */
 async function init() {
   loadGroups();
+  loadNotes();
   ensureGroupColors();
 
   // Set dynamic color for ungrouped accordion header
