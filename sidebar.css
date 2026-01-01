@@ -1,11 +1,11 @@
 :root {
-    --bg-main: #f5f5f5;
-    --bg-secondary: #0b1120;
-    --bg-accent: #111827;
-    --border-subtle: #1f2937;
-    --text-main: #e5e7eb;
-    --text-muted: #9ca3af;
-    --accent: #38bdf8;
+    --bg-main: #F6FBF8;
+    --bg-secondary: #6B9F8A;
+    --bg-accent: #D1FAE5;
+    --border-subtle: #E3EEE9;
+    --text-main: #1F3A2E;
+    --text-muted: #6B7F75;
+    --accent: #656767;
   }
   
   * {
@@ -66,7 +66,7 @@
     font-size: 12px;
     cursor: pointer;
     background: var(--accent);
-    color: #020617;
+    color: #ffffff;
   }
   
   #create-group-btn:hover {
