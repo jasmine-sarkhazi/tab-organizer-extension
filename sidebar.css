@@ -4,7 +4,7 @@
     --bg-accent: #D1FAE5;
     --border-subtle: #E3EEE9;
     --text-main: #1F3A2E;
-    --text-muted: #6B7F75;
+    --text-muted: #93a39b;
     --accent: #656767;
   }
   
@@ -173,7 +173,7 @@
   }
   
   .tab-row.active {
-    background: #1f2937;
+    background: #A7D7C5;
     /* border-left-width is set via inline style, don't override color here */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   }
